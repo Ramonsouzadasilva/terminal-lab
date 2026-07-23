@@ -8,15 +8,13 @@ interface MissionsModeProps {
   completedMissionIds: string[];
   activeMission: Mission | null;
   onSelectMission: (mission: Mission) => void;
-  onOpenAIAssist: (prompt?: string) => void;
 }
 
 export const MissionsMode: React.FC<MissionsModeProps> = ({
   currentOS,
   completedMissionIds,
   activeMission,
-  onSelectMission,
-  onOpenAIAssist
+  onSelectMission
 }) => {
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl text-slate-100 flex flex-col h-full space-y-4">
@@ -81,12 +79,6 @@ export const MissionsMode: React.FC<MissionsModeProps> = ({
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <h5 className="font-bold text-xs">{step.title}</h5>
-                    <button
-                      onClick={() => onOpenAIAssist(`Como resolver: ${step.title}`)}
-                      className="text-[11px] text-purple-400 hover:underline flex items-center gap-1"
-                    >
-                      <Sparkles className="w-3 h-3 text-yellow-300" /> Dica AI
-                    </button>
                   </div>
                   <p className="text-xs text-slate-400 mt-0.5">{step.description}</p>
                   <p className="text-[11px] font-mono text-emerald-400/90 mt-1">{step.hint}</p>

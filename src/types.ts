@@ -2,7 +2,41 @@ export type OSKind = 'linux' | 'powershell' | 'cmd';
 
 export type AppMode = 'terminal' | 'training' | 'missions' | 'comparison' | 'shortcuts' | 'progress';
 
-export type TerminalTheme = 'matrix' | 'classic' | 'powershell' | 'amber' | 'cyberpunk' | 'solarized';
+export type TerminalTheme = 
+  | 'ubuntu' 
+  | 'dracula' 
+  | 'matrix' 
+  | 'nord' 
+  | 'hacker' 
+  | 'monokai' 
+  | 'synthwave' 
+  | 'classic' 
+  | 'amber' 
+  | 'cyberpunk' 
+  | 'solarized' 
+  | 'paper' 
+  | 'powershell';
+
+export interface GitCommit {
+  id: string;
+  message: string;
+  author: string;
+  date: string;
+  branch: string;
+}
+
+export interface GitState {
+  initialized: boolean;
+  currentBranch: string;
+  branches: string[];
+  stagedFiles: string[];
+  commits: GitCommit[];
+  userConfig: {
+    name: string;
+    email: string;
+  };
+  remotes: Record<string, string>;
+}
 
 export interface VFSNode {
   name: string;
@@ -32,6 +66,7 @@ export interface CommandContext {
   envVars: Record<string, string>;
   user: string; // "aluno" or "Administrator" or "root"
   hostname: string;
+  gitState?: GitState;
 }
 
 export interface CommandResult {
@@ -87,7 +122,7 @@ export interface Mission {
 
 export interface ComparisonItem {
   id: string;
-  category: 'Navegação' | 'Manipulação de Arquivos' | 'Processos' | 'Rede & Sistema' | 'Permissões & Usuários' | 'Busca & Filtros';
+  category: 'Navegação' | 'Manipulação de Arquivos' | 'Processos' | 'Rede & Sistema' | 'Permissões & Usuários' | 'Busca & Filtros' | 'Git & Controle de Versão';
   concept: string;
   description: string;
   linux: string;

@@ -13,7 +13,6 @@ interface TerminalProps {
   setTheme: (t: TerminalTheme) => void;
   audioEnabled: boolean;
   onCommandExecuted?: (cmd: string, res: CommandResult) => void;
-  onOpenAIAssist: (cmd?: string) => void;
 }
 
 export const TerminalComp: React.FC<TerminalProps> = ({
@@ -25,8 +24,7 @@ export const TerminalComp: React.FC<TerminalProps> = ({
   theme,
   setTheme,
   audioEnabled,
-  onCommandExecuted,
-  onOpenAIAssist
+  onCommandExecuted
 }) => {
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState<string[]>([]);
@@ -198,12 +196,19 @@ export const TerminalComp: React.FC<TerminalProps> = ({
 
   // Theme styling configurations
   const themeStyles = {
+    ubuntu: 'bg-[#300a24] text-[#f7f7f7] border-[#e95420]/50',
+    dracula: 'bg-[#282a36] text-[#f8f8f2] border-[#bd93f9]/50',
     matrix: 'bg-black text-emerald-400 border-emerald-500/30',
+    nord: 'bg-[#2e3440] text-[#eceff4] border-[#88c0d0]/50',
+    hacker: 'bg-[#020d04] text-[#00ff66] border-[#00ff66]/40',
+    monokai: 'bg-[#2d2a2e] text-[#ffd866] border-[#a9dc76]/40',
+    synthwave: 'bg-[#1a0933] text-[#36f2ef] border-[#ff7edb]/40',
     classic: 'bg-slate-950 text-slate-100 border-slate-800',
-    powershell: 'bg-[#012456] text-slate-100 border-blue-600/50',
     amber: 'bg-[#120a00] text-amber-400 border-amber-600/30',
     cyberpunk: 'bg-[#0b031a] text-cyan-300 border-pink-500/30',
-    solarized: 'bg-[#fdf6e3] text-[#073642] border-[#2aa198]/30'
+    solarized: 'bg-[#fdf6e3] text-[#073642] border-[#2aa198]/40',
+    paper: 'bg-[#f8f9fa] text-[#212529] border-slate-300',
+    powershell: 'bg-[#012456] text-slate-100 border-blue-600/50'
   }[theme];
 
   const fontSizeClass = {
@@ -239,7 +244,7 @@ export const TerminalComp: React.FC<TerminalProps> = ({
           <div className="flex items-center gap-2 font-mono text-xs text-slate-300 font-semibold ml-2">
             <TerminalIcon className="w-3.5 h-3.5 text-emerald-400" />
             <span>
-              {os === 'linux' ? 'Bash Terminal — Ubuntu 22.04' : os === 'powershell' ? 'Windows PowerShell v7.4' : 'Prompt de Comando — Windows CMD'}
+              {os === 'linux' ? 'Bash Terminal — Ubuntu 22.04 LTS (Git Ready)' : os === 'powershell' ? 'Windows PowerShell v7.4' : 'Prompt de Comando — Windows CMD'}
             </span>
           </div>
         </div>
@@ -248,17 +253,50 @@ export const TerminalComp: React.FC<TerminalProps> = ({
         <div className="flex items-center gap-2 text-xs">
           {/* Theme Dropdown */}
           <div className="relative group">
-            <button className="flex items-center gap-1 px-2 py-1 rounded bg-slate-800 text-slate-300 hover:text-white text-xs border border-slate-700">
-              <Palette className="w-3 h-3 text-cyan-400" />
-              <span className="capitalize">{theme}</span>
+            <button className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 hover:text-white text-xs border border-slate-700 shadow-sm">
+              <Palette className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="capitalize font-medium">{theme}</span>
             </button>
-            <div className="absolute right-0 mt-1 hidden group-hover:flex flex-col bg-slate-900 border border-slate-700 rounded-lg shadow-xl p-1 z-50 w-32">
-              <button onClick={() => setTheme('matrix')} className="px-2 py-1 text-left text-xs text-emerald-400 hover:bg-slate-800 rounded">Matrix</button>
-              <button onClick={() => setTheme('classic')} className="px-2 py-1 text-left text-xs text-slate-200 hover:bg-slate-800 rounded">Classic Dark</button>
-              <button onClick={() => setTheme('powershell')} className="px-2 py-1 text-left text-xs text-blue-400 hover:bg-slate-800 rounded">Power Blue</button>
-              <button onClick={() => setTheme('amber')} className="px-2 py-1 text-left text-xs text-amber-400 hover:bg-slate-800 rounded">Retro Amber</button>
-              <button onClick={() => setTheme('cyberpunk')} className="px-2 py-1 text-left text-xs text-pink-400 hover:bg-slate-800 rounded">Cyberpunk</button>
-              <button onClick={() => setTheme('solarized')} className="px-2 py-1 text-left text-xs text-yellow-700 hover:bg-slate-800 rounded">Solarized Light</button>
+            <div className="absolute right-0 mt-1 hidden group-hover:grid grid-cols-2 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl p-2 z-50 w-64 gap-1">
+              <button onClick={() => setTheme('ubuntu')} className="px-2 py-1.5 text-left text-xs text-[#e95420] font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#e95420]" /> Ubuntu
+              </button>
+              <button onClick={() => setTheme('dracula')} className="px-2 py-1.5 text-left text-xs text-[#bd93f9] font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#bd93f9]" /> Dracula
+              </button>
+              <button onClick={() => setTheme('matrix')} className="px-2 py-1.5 text-left text-xs text-emerald-400 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" /> Matrix
+              </button>
+              <button onClick={() => setTheme('nord')} className="px-2 py-1.5 text-left text-xs text-[#88c0d0] font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#88c0d0]" /> Nord
+              </button>
+              <button onClick={() => setTheme('hacker')} className="px-2 py-1.5 text-left text-xs text-[#00ff66] font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#00ff66]" /> Hacker Green
+              </button>
+              <button onClick={() => setTheme('monokai')} className="px-2 py-1.5 text-left text-xs text-[#ffd866] font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ffd866]" /> Monokai
+              </button>
+              <button onClick={() => setTheme('synthwave')} className="px-2 py-1.5 text-left text-xs text-[#ff7edb] font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff7edb]" /> Synthwave
+              </button>
+              <button onClick={() => setTheme('cyberpunk')} className="px-2 py-1.5 text-left text-xs text-cyan-300 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-cyan-300" /> Cyberpunk
+              </button>
+              <button onClick={() => setTheme('classic')} className="px-2 py-1.5 text-left text-xs text-slate-200 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-400" /> Classic Dark
+              </button>
+              <button onClick={() => setTheme('amber')} className="px-2 py-1.5 text-left text-xs text-amber-400 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> Retro Amber
+              </button>
+              <button onClick={() => setTheme('solarized')} className="px-2 py-1.5 text-left text-xs text-amber-200 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-200" /> Solarized
+              </button>
+              <button onClick={() => setTheme('paper')} className="px-2 py-1.5 text-left text-xs text-slate-100 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-white" /> Paper Light
+              </button>
+              <button onClick={() => setTheme('powershell')} className="px-2 py-1.5 text-left text-xs text-blue-400 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-1.5 col-span-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-500" /> Power Blue
+              </button>
             </div>
           </div>
 
@@ -268,10 +306,6 @@ export const TerminalComp: React.FC<TerminalProps> = ({
             <button onClick={() => setFontSize('base')} className={`px-1.5 py-0.5 rounded ${fontSize === 'base' ? 'bg-slate-700 text-white' : 'text-slate-400'}`}>A</button>
             <button onClick={() => setFontSize('lg')} className={`px-1.5 py-0.5 rounded ${fontSize === 'lg' ? 'bg-slate-700 text-white' : 'text-slate-400'}`}>A+</button>
           </div>
-
-          <button onClick={() => onOpenAIAssist()} className="p-1.5 rounded bg-purple-600/20 text-purple-300 border border-purple-500/30 hover:bg-purple-600/30" title="Pedir Ajuda AI">
-            <Sparkles className="w-3.5 h-3.5" />
-          </button>
 
           <button onClick={handleCopyOutput} className="p-1.5 rounded bg-slate-800 text-slate-300 hover:text-white border border-slate-700" title="Copiar Saída">
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}

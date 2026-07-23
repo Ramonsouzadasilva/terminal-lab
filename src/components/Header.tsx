@@ -15,7 +15,6 @@ interface HeaderProps {
   setAudioEnabled: (a: boolean) => void;
   showVFSSidebar: boolean;
   setShowVFSSidebar: (s: boolean | ((prev: boolean) => boolean)) => void;
-  onOpenAIAssist: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -30,8 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
   audioEnabled,
   setAudioEnabled,
   showVFSSidebar,
-  setShowVFSSidebar,
-  onOpenAIAssist
+  setShowVFSSidebar
 }) => {
   return (
     <header className="bg-slate-900 border-b border-slate-800 text-slate-100 sticky top-0 z-40 shadow-xl">
@@ -121,15 +119,6 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <FolderTree className="w-4 h-4 text-emerald-400" />
               <span>Arquivos VFS</span>
-            </button>
-
-            {/* AI Assistant Trigger */}
-            <button
-              onClick={onOpenAIAssist}
-              className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white border border-purple-400/30 shadow-lg shadow-purple-500/10 transition-all hover:scale-105"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-pulse" />
-              <span>Assistente AI</span>
             </button>
 
             {/* Audio Toggle */}

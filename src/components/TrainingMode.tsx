@@ -8,21 +8,19 @@ interface TrainingModeProps {
   completedChallengeIds: string[];
   onSelectChallenge: (challenge: Challenge) => void;
   activeChallenge: Challenge | null;
-  onOpenAIAssist: (cmd?: string) => void;
 }
 
 export const TrainingMode: React.FC<TrainingModeProps> = ({
   currentOS,
   completedChallengeIds,
   onSelectChallenge,
-  activeChallenge,
-  onOpenAIAssist
+  activeChallenge
 }) => {
   const [selectedLevel, setSelectedLevel] = useState<CategoryLevel>('basico');
   const [showHint, setShowHint] = useState(false);
 
   const filteredChallenges = CHALLENGES.filter(
-    c => c.os === currentOS && c.level === selectedLevel
+    c => (c.os === currentOS || c.id.startsWith('git-')) && c.level === selectedLevel
   );
 
   return (
@@ -91,13 +89,6 @@ export const TrainingMode: React.FC<TrainingModeProps> = ({
                 {activeChallenge.title}
               </h3>
             </div>
-            <button
-              onClick={() => onOpenAIAssist(activeChallenge.title)}
-              className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium bg-purple-600/20 text-purple-300 border border-purple-500/30 rounded-lg hover:bg-purple-600/30"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
-              <span>Explicação AI</span>
-            </button>
           </div>
 
           <p className="text-xs text-slate-300 leading-relaxed">

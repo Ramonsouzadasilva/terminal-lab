@@ -1,5 +1,6 @@
 import { CommandContext, CommandResult } from '../types';
 import { formatPath, getNodeAtPath, resolvePath, createNodeAtPath, deleteNodeAtPath } from '../vfs';
+import { executeGitCommand } from './git';
 
 export function executePowerShellCommand(
   input: string,
@@ -234,6 +235,9 @@ DESCRIPTION
     Use Get-Help -Detailed for comprehensive documentation.`
       };
     }
+
+    case 'git':
+      return executeGitCommand(input, ctx);
 
     default:
       return {

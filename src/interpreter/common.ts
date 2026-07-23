@@ -38,6 +38,16 @@ export function getAutocompleteSuggestions(input: string, ctx: CommandContext): 
     return { completion: lastToken, options: matches };
   }
 
+  // Git Subcommands autocomplete
+  if (tokens[0].toLowerCase() === 'git' && tokens.length === 2) {
+    const gitSubs = ['init', 'status', 'add', 'commit', 'log', 'branch', 'checkout', 'clone', 'diff', 'remote', 'push', 'pull', 'config', 'switch'];
+    const matches = gitSubs.filter(s => s.toLowerCase().startsWith(lastToken.toLowerCase()));
+    if (matches.length === 1) {
+      return { completion: `git ${matches[0]}`, options: [] };
+    }
+    return { completion: input, options: matches.map(m => `git ${m}`) };
+  }
+
   // File/Path autocomplete
   let searchDirParts = resolvePath([], ctx.currentPath, isWindows);
   let prefix = lastToken;

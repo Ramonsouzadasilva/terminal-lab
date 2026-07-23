@@ -100,5 +100,62 @@ export const MISSIONS: Mission[] = [
         check: (vfs, path, lastCmd) => lastCmd.toLowerCase().includes('get-service')
       }
     ]
+  },
+  {
+    id: 'mission-git-developer',
+    title: 'Missão: Fluxo Git & GitHub',
+    os: 'linux',
+    badge: '🌿 Git Master',
+    description: 'Sua equipe iniciou um novo projeto de software. Sua missão é inicializar o repositório Git, criar o primeiro commit, criar uma branch e simular o envio das alterações.',
+    difficulty: 'Médio',
+    xpReward: 400,
+    completed: false,
+    steps: [
+      {
+        id: 'step-g1',
+        title: 'Passo 1: Inicializar o Repositório',
+        description: 'Inicialize um novo repositório Git no seu diretório atual.',
+        hint: 'Execute `git init`',
+        explanation: 'Repositório Git local inicializado.',
+        completed: false,
+        check: (vfs, path, lastCmd) => lastCmd.trim() === 'git init'
+      },
+      {
+        id: 'step-g2',
+        title: 'Passo 2: Adicionar Arquivos à Staging Area',
+        description: 'Adicione todos os arquivos atuais para serem monitorados pelo Git.',
+        hint: 'Execute `git add .`',
+        explanation: 'Arquivos adicionados à área de staging.',
+        completed: false,
+        check: (vfs, path, lastCmd) => lastCmd.includes('git add')
+      },
+      {
+        id: 'step-g3',
+        title: 'Passo 3: Fazer o Primeiro Commit',
+        description: 'Grave as alterações com a mensagem "Versao inicial".',
+        hint: 'Execute `git commit -m "Versao inicial"`',
+        explanation: 'Primeiro commit gravado no histórico.',
+        completed: false,
+        check: (vfs, path, lastCmd) => lastCmd.includes('git commit')
+      },
+      {
+        id: 'step-g4',
+        title: 'Passo 4: Criar uma Branch de Feature',
+        description: 'Crie e alterne para a branch "dev".',
+        hint: 'Execute `git checkout -b dev` ou `git branch dev`',
+        explanation: 'Ramificação "dev" criada para o desenvolvimento isolado.',
+        completed: false,
+        check: (vfs, path, lastCmd) => lastCmd.includes('git checkout') || lastCmd.includes('git branch') || lastCmd.includes('git switch')
+      },
+      {
+        id: 'step-g5',
+        title: 'Passo 5: Verificar o Histórico',
+        description: 'Exiba o histórico de commits para garantir que tudo foi registrado.',
+        hint: 'Execute `git log`',
+        explanation: 'Histórico de commits verificado.',
+        completed: false,
+        check: (vfs, path, lastCmd) => lastCmd.includes('git log')
+      }
+    ]
   }
 ];

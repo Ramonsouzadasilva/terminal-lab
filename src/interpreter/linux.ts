@@ -1,5 +1,6 @@
 import { CommandContext, CommandResult, VFSNode } from '../types';
 import { formatPath, getNodeAtPath, resolvePath, createNodeAtPath, deleteNodeAtPath } from '../vfs';
+import { executeGitCommand } from './git';
 
 export function executeLinuxCommand(
   input: string,
@@ -374,16 +375,7 @@ export function executeLinuxCommand(
     }
 
     case 'git': {
-      if (args.length === 0) return { output: 'git: uso: git [--version] [--help] <comando> [<args>]', error: true };
-      const sub = args[0];
-      if (sub === 'status') {
-        return {
-          output: 'No ramo main\nSua ramificação está atualizada com \'origin/main\'.\n\nNada a submeter, diretório de trabalho limpo'
-        };
-      } else if (sub === 'init') {
-        return { output: `Repositório Git vazio inicializado em ${ctx.currentPath}/.git/` };
-      }
-      return { output: `[git] Comando 'git ${sub}' executado com sucesso.` };
+      return executeGitCommand(input, ctx);
     }
 
     case 'ssh': {

@@ -120,5 +120,75 @@ export const COMPARISONS: ComparisonItem[] = [
     powershell: 'Clear-Host (ou cls / clear)',
     cmd: 'cls',
     explanation: 'Tanto `clear` quanto `cls` são amplamente aceitos via aliases no PowerShell.'
+  },
+  {
+    id: 'comp-git-1',
+    category: 'Git & Controle de Versão',
+    concept: 'Inicializar Repositório',
+    description: 'Cria a estrutura .git para versionamento local.',
+    linux: 'git init',
+    powershell: 'git init',
+    cmd: 'git init',
+    explanation: 'O comando `git init` é idêntico em qualquer terminal e cria o repositório no diretório ativo.'
+  },
+  {
+    id: 'comp-git-2',
+    category: 'Git & Controle de Versão',
+    concept: 'Verificar Estado do Projeto',
+    description: 'Mostra arquivos alterados, novos ou prontos para commit.',
+    linux: 'git status',
+    powershell: 'git status',
+    cmd: 'git status',
+    explanation: 'O `git status` exibe a branch ativa e a lista de modificações na área de staging e untracked.'
+  },
+  {
+    id: 'comp-git-3',
+    category: 'Git & Controle de Versão',
+    concept: 'Adicionar Arquivos (Staging)',
+    description: 'Prepara alterações para o próximo commit.',
+    linux: 'git add . (ou git add arquivo.txt)',
+    powershell: 'git add .',
+    cmd: 'git add .',
+    explanation: 'Utilize `git add .` para incluir todas as alterações da pasta atual na área de preparação.'
+  },
+  {
+    id: 'comp-git-4',
+    category: 'Git & Controle de Versão',
+    concept: 'Salvar Versão (Commit)',
+    description: 'Grava permanentemente o instantâneo no histórico.',
+    linux: 'git commit -m "Mensagem do commit"',
+    powershell: 'git commit -m "Mensagem do commit"',
+    cmd: 'git commit -m "Mensagem do commit"',
+    explanation: 'Cada commit grava quem fez a alteração, quando e a descrição do que foi modificado.'
+  },
+  {
+    id: 'comp-git-5',
+    category: 'Git & Controle de Versão',
+    concept: 'Histórico de Commits',
+    description: 'Lista a linha do tempo dos commits do repositório.',
+    linux: 'git log --oneline',
+    powershell: 'git log --oneline',
+    cmd: 'git log --oneline',
+    explanation: 'O parâmetro `--oneline` reduz o log de cada commit para apenas uma linha com o hash curto.'
+  },
+  {
+    id: 'comp-git-6',
+    category: 'Git & Controle de Versão',
+    concept: 'Criar e Alternar Branch',
+    description: 'Desenvolva recursos de forma isolada em ramificações.',
+    linux: 'git checkout -b minha-branch',
+    powershell: 'git checkout -b minha-branch',
+    cmd: 'git checkout -b minha-branch',
+    explanation: '`git checkout -b` ou `git switch -c` criam uma nova branch e alternam a sessão imediatamente.'
+  },
+  {
+    id: 'comp-git-7',
+    category: 'Git & Controle de Versão',
+    concept: 'Clonar Repositório Remoto',
+    description: 'Copia um projeto do GitHub/GitLab para o computador.',
+    linux: 'git clone https://github.com/usuario/repo.git',
+    powershell: 'git clone https://github.com/usuario/repo.git',
+    cmd: 'git clone https://github.com/usuario/repo.git',
+    explanation: 'Faz o download completo do código fonte e histórico de todas as branches.'
   }
 ];

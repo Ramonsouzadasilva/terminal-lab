@@ -204,5 +204,102 @@ export const CHALLENGES: Challenge[] = [
     hint: 'Digite `ipconfig`.',
     explanation: 'O `ipconfig` é a ferramenta de linha de comando fundamental do Windows para diagnóstico de rede e IP.',
     xp: 100
+  },
+  // --- DESAFIOS DE GIT & CONTROLE DE VERSÃO ---
+  {
+    id: 'git-b1',
+    os: 'linux',
+    level: 'basico',
+    title: 'Inicializar Repositório Git',
+    description: 'Transforme o diretório atual em um repositório controlado por versão.',
+    task: 'Execute o comando `git init` para criar um novo repositório Git local.',
+    expectedCommands: ['git init'],
+    hint: 'Digite `git init` para criar a pasta oculta `.git`.',
+    explanation: 'O comando `git init` cria um novo repositório Git e prepara o diretório para rastrear arquivos.',
+    xp: 60
+  },
+  {
+    id: 'git-b2',
+    os: 'linux',
+    level: 'basico',
+    title: 'Verificar Status do Git',
+    description: 'Inspecione quais arquivos foram modificados ou estão na área de staging.',
+    task: 'Execute `git status` para verificar o estado do repositório.',
+    expectedCommands: ['git status'],
+    hint: 'O comando `git status` mostra a branch atual e arquivos alterados.',
+    explanation: 'O `git status` exibe o estado do diretório de trabalho e da área de preparação (staging area).',
+    xp: 60
+  },
+  {
+    id: 'git-b3',
+    os: 'linux',
+    level: 'basico',
+    title: 'Adicionar Arquivos ao Staging',
+    description: 'Prepare arquivos para serem gravados no histórico do projeto.',
+    task: 'Execute `git add .` para adicionar todos os arquivos do diretório atual à área de staging.',
+    expectedCommands: ['git add .', 'git add -A', 'git add *'],
+    hint: 'Use `git add .` para incluir todas as alterações.',
+    explanation: 'O `git add` adiciona arquivos alterados à área de preparação para o próximo commit.',
+    xp: 70
+  },
+  {
+    id: 'git-b4',
+    os: 'linux',
+    level: 'basico',
+    title: 'Criar um Commit',
+    description: 'Grave um ponto de restauração no histórico com uma mensagem descritiva.',
+    task: 'Execute um commit com a mensagem "Primeiro commit": `git commit -m "Primeiro commit"`.',
+    expectedCommands: ['git commit -m "Primeiro commit"', 'git commit -m "Initial commit"'],
+    hint: 'Sintaxe: `git commit -m "Sua mensagem aqui"`',
+    explanation: 'O `git commit` grava permanentemente o instantâneo das alterações salvas no staging no histórico do Git.',
+    xp: 80
+  },
+  {
+    id: 'git-i1',
+    os: 'linux',
+    level: 'intermediario',
+    title: 'Visualizar Histórico com Git Log',
+    description: 'Consulte o histórico de alterações e autores dos commits anteriores.',
+    task: 'Execute `git log` ou `git log --oneline` para ver a lista de commits.',
+    expectedCommands: ['git log', 'git log --oneline'],
+    hint: 'Digite `git log` para ver o histórico detalhado ou `git log --oneline` para formato resumido.',
+    explanation: 'O `git log` mostra a linha do tempo de commits com código hash, autor, data e mensagem de cada versão.',
+    xp: 90
+  },
+  {
+    id: 'git-i2',
+    os: 'linux',
+    level: 'intermediario',
+    title: 'Gerenciar Branches',
+    description: 'Crie e alterne para uma nova ramificação de desenvolvimento chamada "feature".',
+    task: 'Execute `git checkout -b feature` ou `git branch feature` para criar uma nova branch.',
+    expectedCommands: ['git checkout -b feature', 'git branch feature', 'git switch -c feature'],
+    hint: 'Use `git checkout -b feature` para criar e alternar ao mesmo tempo.',
+    explanation: 'Branches permitem desenvolver novas funcionalidades de forma isolada sem afetar o código principal (main).',
+    xp: 100
+  },
+  {
+    id: 'git-i3',
+    os: 'linux',
+    level: 'intermediario',
+    title: 'Configurar Identidade do Git',
+    description: 'Defina seu nome e e-mail que aparecerão na assinatura dos seus commits.',
+    task: 'Configure seu nome com `git config --global user.name "Aluno Dev"`.',
+    expectedCommands: ['git config --global user.name "Aluno Dev"', 'git config user.name "Aluno Dev"'],
+    hint: 'Sintaxe: `git config --global user.name "Seu Nome"`',
+    explanation: 'O `git config` define as preferências de usuário que o Git utiliza para identificar o autor de cada commit.',
+    xp: 90
+  },
+  {
+    id: 'git-a1',
+    os: 'linux',
+    level: 'avancado',
+    title: 'Clonar Repositório Remoto',
+    description: 'Baixe um projeto existente diretamente de uma URL remota.',
+    task: 'Execute `git clone https://github.com/aluno/meu-projeto.git` no terminal.',
+    expectedCommands: ['git clone https://github.com/aluno/meu-projeto.git', 'git clone https://github.com/aluno/projeto.git'],
+    hint: 'Sintaxe: `git clone <URL>`',
+    explanation: 'O `git clone` faz a cópia exata de um repositório hospedado no GitHub/GitLab para o seu computador local.',
+    xp: 130
   }
 ];

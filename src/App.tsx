@@ -13,7 +13,6 @@ import { ComparisonMode } from './components/ComparisonMode';
 import { ShortcutsMode } from './components/ShortcutsMode';
 import { ProgressDashboard } from './components/ProgressDashboard';
 import { DangerousCommandModal } from './components/DangerousCommandModal';
-import { AIAssistantModal } from './components/AIAssistantModal';
 
 export default function App() {
   const [currentOS, setCurrentOS] = useState<OSKind>('linux');
@@ -81,8 +80,6 @@ export default function App() {
 
   // Modals
   const [dangerousAlert, setDangerousAlert] = useState<{ title: string; description: string; command: string } | null>(null);
-  const [aiModalOpen, setAiModalOpen] = useState(false);
-  const [aiModalCommand, setAiModalCommand] = useState<string>('');
 
   // Sync OS switch to context & default path & default theme
   useEffect(() => {
@@ -285,10 +282,6 @@ export default function App() {
         setAudioEnabled={setAudioEnabled}
         showVFSSidebar={showVFSSidebar}
         setShowVFSSidebar={setShowVFSSidebar}
-        onOpenAIAssist={() => {
-          setAiModalCommand('');
-          setAiModalOpen(true);
-        }}
       />
 
       {/* Main Workspace Layout */}
@@ -307,10 +300,6 @@ export default function App() {
               setTheme={setTheme}
               audioEnabled={audioEnabled}
               onCommandExecuted={handleCommandExecuted}
-              onOpenAIAssist={(cmd) => {
-                setAiModalCommand(cmd || '');
-                setAiModalOpen(true);
-              }}
             />
           )}
 
@@ -321,10 +310,6 @@ export default function App() {
                 completedChallengeIds={progress.completedChallengeIds}
                 onSelectChallenge={setActiveChallenge}
                 activeChallenge={activeChallenge}
-                onOpenAIAssist={(cmd) => {
-                  setAiModalCommand(cmd || '');
-                  setAiModalOpen(true);
-                }}
               />
               <div className="mt-2">
                 <TerminalComp
@@ -337,10 +322,6 @@ export default function App() {
                   setTheme={setTheme}
                   audioEnabled={audioEnabled}
                   onCommandExecuted={handleCommandExecuted}
-                  onOpenAIAssist={(cmd) => {
-                    setAiModalCommand(cmd || '');
-                    setAiModalOpen(true);
-                  }}
                 />
               </div>
             </div>
@@ -353,10 +334,6 @@ export default function App() {
                 completedMissionIds={progress.completedMissionIds}
                 activeMission={activeMission}
                 onSelectMission={setActiveMission}
-                onOpenAIAssist={(cmd) => {
-                  setAiModalCommand(cmd || '');
-                  setAiModalOpen(true);
-                }}
               />
               <div className="mt-2">
                 <TerminalComp
@@ -369,10 +346,6 @@ export default function App() {
                   setTheme={setTheme}
                   audioEnabled={audioEnabled}
                   onCommandExecuted={handleCommandExecuted}
-                  onOpenAIAssist={(cmd) => {
-                    setAiModalCommand(cmd || '');
-                    setAiModalOpen(true);
-                  }}
                 />
               </div>
             </div>
@@ -425,14 +398,6 @@ export default function App() {
       <DangerousCommandModal
         alertData={dangerousAlert}
         onClose={() => setDangerousAlert(null)}
-      />
-
-      {/* AI Assistant Helper Modal */}
-      <AIAssistantModal
-        isOpen={aiModalOpen}
-        onClose={() => setAiModalOpen(false)}
-        os={currentOS}
-        initialCommand={aiModalCommand}
       />
     </div>
   );

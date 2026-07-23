@@ -1,5 +1,6 @@
 import { CommandContext, CommandResult } from '../types';
 import { formatPath, getNodeAtPath, resolvePath, createNodeAtPath, deleteNodeAtPath } from '../vfs';
+import { executeGitCommand } from './git';
 
 export function executeCMDCommand(
   input: string,
@@ -249,6 +250,9 @@ export function executeCMDCommand(
         ].join('\n')
       };
     }
+
+    case 'git':
+      return executeGitCommand(input, ctx);
 
     default:
       return {
