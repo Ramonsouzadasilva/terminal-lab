@@ -11,6 +11,25 @@ Praticar comandos importantes de sistemas operacionais através de um ambiente i
 - Linux Terminal
 - Windows CMD
 - Windows PowerShell
+-
+
+## 📸 Capturas de tela
+
+### Terminal Linux
+
+![Linux](./screenshots/linux.png)
+
+### Windows CMD
+
+![CMD](./screenshots/cmd.png)
+
+### PowerShell
+
+![PowerShell](./screenshots/powershell.png)
+
+### Git
+
+![Git](./screenshots/git.png)
 
 ## Tecnologias
 
