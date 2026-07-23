@@ -1,0 +1,6 @@
+{
+  "name": "Terminal Master - Treinamento Linux & Windows",
+  "description": "Plataforma interativa para aprender e praticar comandos reais de Linux, PowerShell e CMD com simulação de terminal, sistema de arquivos virtual, desafios, conquistas e comparação de equivalências.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
